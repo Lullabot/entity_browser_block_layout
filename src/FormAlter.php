@@ -10,9 +10,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\StringTranslation\TranslationInterface;
-use Drupal\node\NodeTypeInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\Core\Messenger\MessengerInterface;
 
 /**
  * Implementation callbacks for form alter hooks.
@@ -69,14 +67,11 @@ class FormAlter implements ContainerInjectionInterface {
    *   The Entity Display Repository service.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The Entity Type Manager service.
-   * @param \Drupal\entity_browser_block\LayoutHelper $layout_helper
-   *   The Layout Helper service.
    */
   protected function __construct(
     TranslationInterface $string_translation,
     EntityDisplayRepositoryInterface $entity_display_repo,
     EntityTypeManagerInterface $entity_type_manager) {
-
     $this->stringTranslation = $string_translation;
     $this->entityDisplayRepo = $entity_display_repo;
     $this->entityTypeManager = $entity_type_manager;
@@ -111,7 +106,7 @@ class FormAlter implements ContainerInjectionInterface {
 
     // Add a process callback to hide the "open_modal" button if there is
     // something selected.
-    //$form['settings']['selection']['entity_browser']['#process'][] = [$this, 'hideOpenBrowserButton'];
+    $form['settings']['selection']['entity_browser']['#process'][] = [$this, 'hideOpenBrowserButton'];
 
     // Add custom css.
     $form['#attached']['library'][] = 'entity_browser_block_layout/eb_layout_panel';
@@ -175,7 +170,7 @@ class FormAlter implements ContainerInjectionInterface {
     return $entity_browser_display;
   }
 
- /**
+  /**
    * Implements callback_form_element_process().
    *
    * Filters the view modes available to Entity Browser items.
