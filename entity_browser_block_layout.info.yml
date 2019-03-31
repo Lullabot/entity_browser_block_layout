@@ -1,0 +1,4 @@
+name: "Entity Browser Block Layout"
+description: Adjustments to make it easier to use Entity Browser blocks in layout builder.
+type: module
+core: 8.x

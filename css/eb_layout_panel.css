@@ -1,0 +1,38 @@
+/* Fix the tiny entity reference browser result table to look better in
+  * off-canvas area */
+#drupal-off-canvas #entity-browser-block-form table td,
+#drupal-off-canvas #entity-browser-block-form table th {
+  display: inline-block;
+  margin: 0 auto;
+}
+#drupal-off-canvas #entity-browser-block-form table th {
+  display: none;
+}
+/* Embiggen the item name. */
+#drupal-off-canvas #entity-browser-block-form td:nth-child(1) {
+  width: 100%;
+  font-size: larger;
+}
+/* Hide the weight element. */
+#drupal-off-canvas #entity-browser-block-form td:nth-child(4) {
+  display: none;
+}
+/* Give the selected items in the table some emphasis so they don't just
+bleed into the background */
+#drupal-off-canvas #entity-browser-block-form table,
+#drupal-off-canvas #entity-browser-block-form table td {
+  background-color: #277abd !important;
+  color: #fff !important;
+}
+/* Style edit button to look like Remove button */
+#drupal-off-canvas #entity-browser-block-form .button {
+  padding: 4px 20px;
+  border-radius: 20em;
+  background: #777;
+  font-weight: 600;
+  font-size: 14px;
+  color: #f5f5f5;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.5s ease;
+}

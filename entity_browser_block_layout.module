@@ -1,0 +1,76 @@
+<?php
+
+/**
+ * @file
+ * Contains entity_browser_block_layout.module.
+ */
+
+use Drupal\entity_browser_block_layout\FormAlter;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Entity\EntityInterface;
+
+/**
+ * Implements hook_form_FORM_ID_alter() for layout_builder_update_block().
+ */
+function entity_browser_block_layout_form_layout_builder_update_block_alter(&$form, FormStateInterface $form_state, $form_id) {
+  \Drupal::classResolver(FormAlter::class)
+    ->alterLayoutBuilderUpdateBlockForm($form, $form_state, $form_id);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for layout_builder_add_block().
+ */
+function entity_browser_block_layout_form_layout_builder_add_block_alter(&$form, FormStateInterface $form_state, $form_id) {
+  \Drupal::classResolver(FormAlter::class)
+    ->alterLayoutBuilderAddBlockForm($form, $form_state, $form_id);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for node_type_edit_form().
+ */
+function entity_browser_block_layout_form_node_type_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  \Drupal::classResolver(FormAlter::class)
+    ->alterEntityTypeForm('node', $form, $form_state, $form_id);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for node_type_add_form().
+ */
+function entity_browser_block_layout_form_node_type_add_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  \Drupal::classResolver(FormAlter::class)
+    ->alterEntityTypeForm('node', $form, $form_state, $form_id);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for node_type_edit_form().
+ */
+function entity_browser_block_layout_form_media_type_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  \Drupal::classResolver(FormAlter::class)
+    ->alterEntityTypeForm('media', $form, $form_state, $form_id);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for node_type_add_form().
+ */
+function entity_browser_block_layout_form_media_type_add_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  \Drupal::classResolver(FormAlter::class)
+    ->alterEntityTypeForm('media', $form, $form_state, $form_id);
+}
+
+/**
+ * Implements hook_preprocess_views_view().
+ *
+ * Adds css and js to entity browser views that will highlight the selected
+ * row and make the whole row clickable, not just the checkbox.
+ */
+function entity_browser_block_layout_preprocess_views_view(&$variables) {
+  $affected_views = [
+    'node_browser',
+    'block_browser',
+    'media_entity_browser',
+    'bio_browser',
+  ];
+  if (in_array($variables['view']->id(), $affected_views)) {
+    $variables['view_array']['#attached']['library'][] = 'entity_browser_block_layout/eb_view_decoration';
+  }
+}

@@ -1,0 +1,10 @@
+eb_layout_panel:
+  css:
+    theme:
+      css/eb_layout_panel.css: {}
+eb_view_decoration:
+  css:
+    theme:
+      css/eb_view_decoration.css: {}
+  js:
+    js/eb_view_decoration.js: {}

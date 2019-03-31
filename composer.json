@@ -1,0 +1,10 @@
+{
+  "name": "lullabot/entity_browser_block_layout",
+  "description": "Adjustments to make it easier to use Entity Browser blocks in layout builder.",
+  "type": "drupal-custom-module",
+  "homepage": "https://github.com/Lullabot/entity_browser_block_layout",
+  "keywords": ["Drupal"],
+  "require": {
+    "drupal/entity_browser_block": "^1.0"
+  }
+}
