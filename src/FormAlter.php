@@ -26,11 +26,18 @@ class FormAlter implements ContainerInjectionInterface {
   const VIEW_MODES_SETTING = 'entity_browser_block_layout_view_modes';
 
   /**
-   * The default view modes available to Layout Builder Entity Browser items.
+   * The fallback view modes available to Layout Builder Entity Browser items.
    */
   const DEFAULT_VIEW_MODES = [
     'default',
+  ];
+
+  /**
+   * The preferred view modes to use as defaults, if available.
+   */
+  const PREFERRED_VIEW_MODES = [
     'teaser',
+    'promo',
   ];
 
   /**
@@ -209,19 +216,15 @@ class FormAlter implements ContainerInjectionInterface {
               static::VIEW_MODES_SETTING, static::DEFAULT_VIEW_MODES));
 
           // Filter out the disallowed view modes.
+          $view_mode = &$table[$row]['view_mode'];
           $view_mode['#options'] = array_filter($view_mode['#options'],
             function ($view_mode_option) use ($allowed_view_modes) {
               return in_array($view_mode_option, $allowed_view_modes);
             }, ARRAY_FILTER_USE_KEY);
 
-          // If there's not existing value, set the default value to the
-          // first allowed value, or default if no other view mode is
-          // available.
-          $default_value = 'default';
-          if (count($allowed_view_modes) > 0) {
-            $default_value = array_shift($allowed_view_modes);
-          }
-          $view_mode = &$table[$row]['view_mode'];
+          // See if a preferred view mode is available in the allowed list.
+          $preferred = array_intersect($allowed_view_modes, static::PREFERRED_VIEW_MODES);
+          $default_value = !empty($preferred) ? reset($preferred) : 'default';
           $view_mode['#default_value']
             = $view_mode['#default_value'] ?? $default_value;
 
