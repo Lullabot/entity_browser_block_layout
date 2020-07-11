@@ -10,6 +10,19 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Entity\EntityInterface;
 
 /**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Add a label to the node date operator so you can tell what value it's for.
+ */
+function entity_browser_block_layout_form_views_exposed_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $view_ids = ['node_browser'];
+  $view = $form_state->getStorage('view');
+  if (in_array($view['view']->id(), $view_ids)) {
+    $form['created_op']['#title'] = t('Post date');
+  }
+}
+
+/**
  * Implements hook_form_FORM_ID_alter() for layout_builder_update_block().
  */
 function entity_browser_block_layout_form_layout_builder_update_block_alter(&$form, FormStateInterface $form_state, $form_id) {

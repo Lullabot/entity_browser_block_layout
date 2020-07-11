@@ -109,3 +109,7 @@ form.entity-browser-form > .form-actions input[type=submit] {
   float: left;
   margin: 0.75rem 0 0.75rem 1.25rem;
 }
+
+.js-form-item-created-op {
+  clear: left;
+}

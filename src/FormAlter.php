@@ -111,10 +111,6 @@ class FormAlter implements ContainerInjectionInterface {
     // Add a process callback to adjust the available view modes.
     $settings['selection']['table']['#process'][] = [$this, 'filterViewModes'];
 
-    // Add a process callback to hide the "open_modal" button if there is
-    // something selected.
-    $form['settings']['selection']['entity_browser']['#process'][] = [$this, 'hideOpenBrowserButton'];
-
     // Add custom css.
     $form['#attached']['library'][] = 'entity_browser_block_layout/eb_layout_panel';
 
