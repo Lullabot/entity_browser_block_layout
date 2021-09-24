@@ -1,3 +1,5 @@
+[This project is now on drupal.org](https://www.drupal.org/project/entity_browser_block_layout).
+
 # Entity Browser Block Layout 
 
 UX and CSS improvements to make it easier to use Entity Browser blocks in Layout Builder. It does the following:
